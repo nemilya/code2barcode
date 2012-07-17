@@ -103,6 +103,6 @@ __END__
   <small>
     code2barcode
     based on <a href="https://github.com/toretore/barby">barby</a> |
-    <a href="">source code</a> |
+    <a href="https://github.com/nemilya/code2barcode">source code</a> |
     <a href="/">home</a> |
   </small>
