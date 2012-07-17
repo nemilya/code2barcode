@@ -8,9 +8,10 @@ require 'barby/barcode/code_128'
 
 require 'barby/outputter/ascii_outputter'
 require 'barby/outputter/html_outputter'
+require 'barby/outputter/png_outputter'
 
 before do
-  @outputs = ['ascii', 'html']
+  @outputs = ['ascii', 'html', 'png']
   @barcodes = ['code_25', 'code_128']
 end
 
@@ -29,6 +30,12 @@ helpers do
       barcode_engine = Barby::Code128B.new(code)
     end
     barcode_engine
+  end
+
+  def get_png_barcode(barcode_engine)
+    require 'base64'
+    encoded_string = Base64.encode64(barcode_engine.to_png)
+    "<img src=\"data:image/png;base64,#{encoded_string}\">"
   end
 
 end
@@ -87,6 +94,8 @@ __END__
       <pre><%= @barcode_engine.to_ascii%></pre>
     <% elsif @output == 'html' %>
       <%= @barcode_engine.to_html %>
+    <% elsif @output == 'png' %>
+      <%= get_png_barcode(@barcode_engine) %>
     <% end %>
   <% end %>
 
